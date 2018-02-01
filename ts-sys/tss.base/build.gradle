@@ -1,0 +1,10 @@
+ext {
+    guavaVersion = '23.6-jre'
+}
+
+
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: springBootVersion
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-logging', version: springBootVersion
+    compile group: 'com.google.guava', name: 'guava', version: guavaVersion
+}

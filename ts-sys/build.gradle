@@ -1,0 +1,64 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.9.RELEASE'
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'org.springframework.boot'
+
+allprojects {
+    group 'org.aming'
+    version '1.0.0'
+
+    apply plugin: 'java'
+
+    ext {
+        springBootVersion = '1.5.9.RELEASE'
+    }
+
+    // JAVA版本要求
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+
+    // java编译的时候缺省状态下会因为中文字符而失败
+    [compileJava,compileTestJava,javadoc]*.options*.encoding = 'UTF-8'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+    }
+}
+
+subprojects {
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+
+    repositories {
+        mavenCentral()
+    }
+
+    ext {
+        apacheCommonsLang3Version = '3.7'
+        quartzVersion = '2.3.0'
+    }
+
+    dependencies {
+        compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: springBootVersion
+        compile group: 'org.quartz-scheduler', name: 'quartz', version: quartzVersion
+        compile group: 'org.quartz-scheduler', name: 'quartz-jobs', version: quartzVersion
+        compile group: 'org.apache.commons', name: 'commons-lang3', version: apacheCommonsLang3Version
+        compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.8-dmr'
+    }
+}

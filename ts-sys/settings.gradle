@@ -1,0 +1,6 @@
+rootProject.name = 'tss'
+include 'tss.web'
+include 'tss.base'
+include 'tss.task'
+include 'tss.core'
+

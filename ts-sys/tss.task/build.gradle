@@ -1,0 +1,9 @@
+ext {
+    quartzVersion = '2.3.0'
+}
+
+dependencies {
+    compile(project(":tss.base"))
+    compile group: 'org.quartz-scheduler', name: 'quartz', version: quartzVersion
+    compile group: 'org.quartz-scheduler', name: 'quartz-jobs', version: quartzVersion
+}
