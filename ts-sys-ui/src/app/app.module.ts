@@ -9,9 +9,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTableModule } from '@angular/material/table';
 
 import { AppComponent } from './app.component';
 import { DatasourceComponent } from './datasource/datasource.component';
+import { JobComponent } from './job/job.component';
 
 const appRoutes: Routes = [
   { path: 'datasource', component: DatasourceComponent }
@@ -24,9 +26,10 @@ const appRoutes: Routes = [
     MatListModule,
     MatButtonModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    MatTableModule
   ],
-  declarations: [DatasourceComponent]
+  declarations: [DatasourceComponent, JobComponent]
 })
 export class AngularMasterailModule {}
 

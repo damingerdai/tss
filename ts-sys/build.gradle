@@ -23,7 +23,7 @@ allprojects {
     apply plugin: 'java'
 
     ext {
-        springBootVersion = '1.5.9.RELEASE'
+        springBootVersion = '1.5.10.RELEASE'
     }
 
     // JAVA版本要求
@@ -60,5 +60,6 @@ subprojects {
         compile group: 'org.quartz-scheduler', name: 'quartz-jobs', version: quartzVersion
         compile group: 'org.apache.commons', name: 'commons-lang3', version: apacheCommonsLang3Version
         compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.8-dmr'
+        testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion
     }
 }

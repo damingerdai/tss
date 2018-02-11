@@ -15,20 +15,21 @@ public class TssDaoException extends TssException {
     private String sql;
     private Object[] params;
 
-    TssDaoException(String sql, Object[] params, Throwable cause) {
-        super();
-        this.code = ErrorCodeConstant.ERR_DAO;
+    TssDaoException(String code, String message, String sql, Object[] params, Throwable cause) {
+        super(code,message, cause);
         this.sql = sql;
-        this.params = Arrays.copyOf(params, params.length);
-        this.message = "fail to execute sql: " + replacePlaceholderWithParams(sql, params);
+        this.params = params;
     }
 
-    TssDaoException(String sql, Throwable cause) {
+    TssDaoException(String code, String message, String sql, Object[] params) {
         super();
-        this.code = ErrorCodeConstant.ERR_DAO;
+        this.code = code;
+        this.message = message;
         this.sql = sql;
-        this.message = "fail to execute sql: " + sql;
+        this.params = params;
     }
+
+
 
     private String replacePlaceholderWithParams(String sql, Object[] params) {
         if (Objects.isNull(sql)) {

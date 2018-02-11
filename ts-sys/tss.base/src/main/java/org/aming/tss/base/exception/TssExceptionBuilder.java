@@ -6,11 +6,11 @@ package org.aming.tss.base.exception;
  */
 public class TssExceptionBuilder {
 
-    public TssException buildTssException(String code, String message, Throwable cause) {
+    public static TssException buildTssException(String code, String message, Throwable cause) {
         return new TssException(code, message, cause);
     }
 
-    public TssException buildTssException(String code, String message) {
+    public static TssException buildTssException(String code, String message) {
         return new TssException(code, message);
     }
 }

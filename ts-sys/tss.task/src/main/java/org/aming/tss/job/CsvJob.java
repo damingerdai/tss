@@ -1,4 +1,4 @@
-package org.aming.job;
+package org.aming.tss.job;
 
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -8,7 +8,7 @@ import org.quartz.JobExecutionException;
  * @author daming
  * @version 2018/1/30.
  */
-public class CommonJob implements Job{
+public class CsvJob implements Job {
 
 
     @Override

@@ -21,7 +21,7 @@ public class QuartzConfig {
 
     @Bean
     @Qualifier("quartzProperites")
-    public Properties quartzProperites() throws IOException {
+    public Properties quartzProperties() throws IOException {
         return PropertiesLoaderUtils.loadAllProperties("quartz.properties");
     }
 

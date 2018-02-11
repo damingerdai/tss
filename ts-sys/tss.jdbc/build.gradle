@@ -1,0 +1,18 @@
+group 'org.aming'
+version '1.0.0'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile(project(":tss.base"))
+    compile (group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: springBootVersion) {
+        exclude group:'org.apache.tomcat', module: 'tomcat-jbdc'
+    }
+    compile group: 'com.mchange', name: 'c3p0', version: '0.9.5.2'
+}
