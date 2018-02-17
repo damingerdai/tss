@@ -17,5 +17,11 @@ public interface ExceptionService {
 
     TssException buildTssException(String code, Object[] params);
 
-    TssDaoException buildTssDaoException(String code, String sql, Object[] params );
+	TssDaoException buildTssDaoException(String code, String sql, Object[] params, Throwable cause);
+
+	TssDaoException buildTssDaoException(String code, String sql, Object[] params);
+
+	TssDaoException buildTssDaoSystemException(String message,String sql, Object[] params, Throwable cause);
+
+	TssException buildServiceException(String message, Throwable cause);
 }

@@ -18,7 +18,8 @@ public class ErrorCodeServiceImpl implements ErrorCodeService {
 
 	@Override
 	public String getErrorMessage(String errorCode) throws TssException {
-		return errorProp.getErrorMessage(errorCode);
+		Optional<String> optional = Optional.of(errorProp.getErrorMessage(errorCode));
+		return optional.get();
 	}
 
 	@Override

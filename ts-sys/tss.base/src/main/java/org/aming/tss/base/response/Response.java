@@ -12,29 +12,31 @@ public class Response implements Serializable {
 
     private static final long serialVersionUID = -7558906894507306601L;
 
-    private int statusCode;
+    private static final int DEFAULT_STATUS_CODE = 200;
 
-    private String message;
+    private int statusCode = DEFAULT_STATUS_CODE;
 
-    public int getStatusCode() {
-        return statusCode;
-    }
+    private Error error;
 
-    public Response setStatusCode(int statusCode) {
-        this.statusCode = statusCode;
-        return this;
-    }
+	public int getStatusCode() {
+		return statusCode;
+	}
 
-    public String getMessage() {
-        return message;
-    }
+	public Response setStatusCode(int statusCode) {
+		this.statusCode = statusCode;
+		return this;
+	}
 
-    public Response setMessage(String message) {
-        this.message = message;
-        return this;
-    }
+	public Error getError() {
+		return error;
+	}
 
-    public Response() {
+	public Response setError(Error error) {
+		this.error = error;
+		return this;
+	}
+
+	public Response() {
         super();
     }
 

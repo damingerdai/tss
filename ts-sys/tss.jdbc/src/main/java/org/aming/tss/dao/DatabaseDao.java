@@ -1,6 +1,7 @@
 package org.aming.tss.dao;
 
-import org.aming.tss.base.jdbc.DataBase;
+import org.aming.tss.base.exception.TssDaoException;
+import org.aming.tss.base.jdbc.Database;
 
 import java.util.List;
 
@@ -10,5 +11,7 @@ import java.util.List;
  */
 public interface DatabaseDao {
 
-    List<DataBase> getAllDataBase();
+    List<Database> getAllDataBase() throws TssDaoException;
+
+	Database getDataBase(String databaseName);
 }

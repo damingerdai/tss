@@ -1,78 +1,84 @@
 package org.aming.tss.base.jdbc;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.io.Serializable;
 
 /**
  * @author daming
  * @version 2018/1/30.
  */
-public class DataBase implements Serializable {
+public class Database implements Serializable {
 
-    private static final long serialVersionUID = -3693892426926277731L;
+	private static final long serialVersionUID = 8968823470833943722L;
 
-    private int type;
+	private int id;
+	private String name;
+	private String url;
+	private String driver;
+	private String username;
+	private String password;
 
-    private String host;
+	public int getId() {
+		return id;
+	}
 
-    private int port;
+	public Database setId(int id) {
+		this.id = id;
+		return this;
+	}
 
-    private String username;
+	public String getName() {
+		return name;
+	}
 
-    private String password;
+	public Database setName(String name) {
+		this.name = name;
+		return this;
+	}
 
-    private String databaseName;
+	public String getUrl() {
+		return url;
+	}
 
-    public int getType() {
-        return type;
-    }
+	public Database setUrl(String url) {
+		this.url = url;
+		return this;
+	}
 
-    public DataBase setType(int type) {
-        this.type = type;
-        return this;
-    }
+	public String getDriver() {
+		return driver;
+	}
 
-    public String getHost() {
-        return host;
-    }
+	public Database setDriver(String driver) {
+		this.driver = driver;
+		return this;
+	}
 
-    public DataBase setHost(String host) {
-        this.host = host;
-        return this;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public int getPort() {
-        return port;
-    }
+	public Database setUsername(String username) {
+		this.username = username;
+		return this;
+	}
 
-    public DataBase setPort(int port) {
-        this.port = port;
-        return this;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public Database setPassword(String password) {
+		this.password = password;
+		return this;
+	}
 
-    public DataBase setUsername(String username) {
-        this.username = username;
-        return this;
-    }
+	public Database() {
+		super();
+	}
 
-    public String getPassword() {
-        return password;
-    }
-
-    public DataBase setPassword(String password) {
-        this.password = password;
-        return this;
-    }
-
-    public String getDatabaseName() {
-        return databaseName;
-    }
-
-    public DataBase setDatabaseName(String databaseName) {
-        this.databaseName = databaseName;
-        return this;
-    }
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
 }

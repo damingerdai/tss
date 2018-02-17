@@ -57,13 +57,8 @@ public class JdbcInfo implements Serializable {
         super();
     }
 
-    public static JdbcInfo getJdbcInfo(DataBase dataBase) {
-        DataBaseType dataBaseType = DataBaseType.getDataBaseType(dataBase.getType());
-        if (dataBaseType == DataBaseType.MYSQL) {
-
-        } else {
-
-        }
+    public static JdbcInfo getJdbcInfo(Database dataBase) {
+        //DataBaseType dataBaseType = DataBaseType.getDataBaseType(dataBase.getType());
 
         return new JdbcInfo();
     }

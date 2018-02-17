@@ -10,6 +10,8 @@ import org.quartz.JobExecutionException;
  */
 public class CsvJob implements Job {
 
+	private String csvOutPath;
+	private String dataBaseName;
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {

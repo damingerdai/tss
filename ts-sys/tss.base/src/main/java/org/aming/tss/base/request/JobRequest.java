@@ -16,6 +16,11 @@ public class JobRequest implements Serializable {
      * 任务编码，表明任务的类型
      */
     private String jobCode;
+
+	/**
+	 * 任务名字
+	 */
+	private String jobName;
     /**
      * 任务组
      */
@@ -42,7 +47,16 @@ public class JobRequest implements Serializable {
         return this;
     }
 
-    public String getJobGroup() {
+	public String getJobName() {
+		return jobName;
+	}
+
+	public JobRequest setJobName(String jobName) {
+		this.jobName = jobName;
+		return this;
+	}
+
+	public String getJobGroup() {
         return jobGroup;
     }
 

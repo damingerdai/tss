@@ -1,15 +1,22 @@
 package org.aming.tss.dao.impl;
 
-import org.aming.tss.base.exception.TssExceptionBuilder;
-import org.aming.tss.base.jdbc.DataBase;
+import org.aming.core.service.ExceptionService;
+import org.aming.tss.base.constant.ErrorCodeConstant;
+import org.aming.tss.base.exception.TssDaoException;
+import org.aming.tss.base.jdbc.Database;
 import org.aming.tss.base.logger.LoggerManager;
 import org.aming.tss.base.logger.TssLogger;
+import org.aming.tss.base.util.SqlLogUtils;
 import org.aming.tss.dao.DatabaseDao;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author daming
@@ -21,32 +28,58 @@ public class DatabaseDaoImpl implements DatabaseDao {
     private final TssLogger logger = LoggerManager.getLogger(getClass());
 
     private JdbcTemplate jdbcTemplate;
+    private ExceptionService exceptionService;
 
     @Override
-    public List<DataBase> getAllDataBase() {
+    public List<Database> getAllDataBase() throws TssDaoException {
         Instant begin = Instant.now();
-        String sql = "select databaseName,host,port,username,`password`, `type` from `database`";
+        String sql = "select id,`name`, driver, url,`username`,`password` from `database` where `status` = 1";
         try {
             return jdbcTemplate.query(sql, (rs,i) -> {
-                return new DataBase().
-                        setDatabaseName(rs.getString("databaseName"))
-                        .setHost(rs.getString("host"))
-                        .setPort(rs.getInt("port"))
-                        .setUsername(rs.getString("username"))
-                        .setPassword(rs.getString("password"))
-                        .setPort(rs.getInt("type"));
+                return getDataBaseFromResultSet(rs);
             });
         } catch (Exception ex) {
-            logger.error("fail to get all database", ex);
+            throw exceptionService.buildTssDaoException(ErrorCodeConstant.ERR_DAO,sql,null,ex);
         } finally {
-
+			SqlLogUtils.info(sql, null, Duration.between(begin, Instant.now()));
         }
-        return null;
     }
 
 
-    public DatabaseDaoImpl(JdbcTemplate jdbcTemplate) {
+	@Override
+	public Database getDataBase(String databaseName) throws TssDaoException {
+    	String sql = "select id,`name`, driver, url,`username`,`password` from `database` where `status` = 1 where name = ?";
+    	Object[] params = new Object[] { databaseName };
+    	Instant begin = Instant.now();
+    	try {
+			Optional<Database> optional = Optional.of(jdbcTemplate.query(sql, params, rs -> {
+				while (rs.next()) {
+					return getDataBaseFromResultSet(rs);
+				}
+				return null;
+			}));
+		} catch (NullPointerException ex) {
+			exceptionService.buildTssDaoException(ex.getMessage(), sql, params, ex);
+		} catch (Exception ex) {
+
+		} finally {
+			SqlLogUtils.info(sql, null, Duration.between(begin, Instant.now()));
+		}
+		return null;
+	}
+
+	private Database getDataBaseFromResultSet(ResultSet rs) throws SQLException {
+		return new Database()
+				.setId(rs.getInt("id"))
+				.setName(rs.getString("name"))
+				.setDriver(rs.getString("driver"))
+				.setUsername(rs.getString("username"))
+				.setPassword(rs.getString("password"));
+	}
+
+	public DatabaseDaoImpl(JdbcTemplate jdbcTemplate,ExceptionService exceptionService) {
         super();
         this.jdbcTemplate = jdbcTemplate;
+        this.exceptionService = exceptionService;
     }
 }

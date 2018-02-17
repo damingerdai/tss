@@ -11,8 +11,10 @@ repositories {
 
 dependencies {
     compile(project(":tss.base"))
+    compile(project(':tss.core'))
     compile (group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: springBootVersion) {
         exclude group:'org.apache.tomcat', module: 'tomcat-jbdc'
     }
-    compile group: 'com.mchange', name: 'c3p0', version: '0.9.5.2'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.9-rc'
+    compile group: 'com.zaxxer', name: 'HikariCP', version: '2.7.7'
 }

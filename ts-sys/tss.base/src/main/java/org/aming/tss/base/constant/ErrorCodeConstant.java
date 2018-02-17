@@ -6,10 +6,11 @@ package org.aming.tss.base.constant;
  */
 public class ErrorCodeConstant {
 
-    public static final String ERR_WEB = "error_web";
+    public static final String ERR_DAO = "ERR-10001";
 
-    public static final String ERR_SERVICE = "error_service";
+    public static final String ERR_JOB = "ERR-10002";
 
-    public static final String ERR_DAO = "error_dao";
+    public static final String COMMON_ERR = "ERR-10000";
 
+    public static final String ERR_DAO_SYSTEM = "ERR-10003";
 }
