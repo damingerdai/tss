@@ -1,7 +1,9 @@
 package org.aming.tss.web;
 
+import org.aming.tss.base.util.SpringContextHolder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
@@ -12,6 +14,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan("org.aming")
 public class Application {
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        ApplicationContext ctx = SpringApplication.run(Application.class, args);
+		SpringContextHolder.setApplicationContext(ctx);
     }
 }

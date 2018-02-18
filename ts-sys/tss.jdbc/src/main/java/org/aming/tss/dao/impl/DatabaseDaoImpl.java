@@ -58,14 +58,14 @@ public class DatabaseDaoImpl implements DatabaseDao {
 				}
 				return null;
 			}));
+			return optional.get();
 		} catch (NullPointerException ex) {
-			exceptionService.buildTssDaoException(ex.getMessage(), sql, params, ex);
+			throw exceptionService.buildTssDaoException(ex.getMessage(), sql, params, ex);
 		} catch (Exception ex) {
-
+			throw exceptionService.buildTssDaoException(ErrorCodeConstant.ERR_DAO, sql, params, ex);
 		} finally {
 			SqlLogUtils.info(sql, null, Duration.between(begin, Instant.now()));
 		}
-		return null;
 	}
 
 	private Database getDataBaseFromResultSet(ResultSet rs) throws SQLException {

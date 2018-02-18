@@ -12,8 +12,7 @@ import java.util.List;
  */
 public interface DatabaseService {
 
-
-    List<Database> getAllDatabase();
+    List<Database> getAllDatabase() throws TssException;
 
     DataSource getDataBase(String databaseName) throws TssException;
 }

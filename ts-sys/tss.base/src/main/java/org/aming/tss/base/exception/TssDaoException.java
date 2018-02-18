@@ -37,7 +37,7 @@ public class TssDaoException extends TssException {
         }
         if (Objects.nonNull(params)) {
             for (Object param: params) {
-                sql = sql.replaceFirst("\\?", String.valueOf(param));
+                sql = sql.replaceFirst("\\?", "'" + String.valueOf(param) + "'");
             }
         }
         return sql;

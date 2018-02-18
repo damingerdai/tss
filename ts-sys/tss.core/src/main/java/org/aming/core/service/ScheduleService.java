@@ -9,5 +9,10 @@ import org.aming.tss.base.request.JobRequest;
  */
 public interface ScheduleService {
 
+	/**
+	 * 添加一个job
+	 * @param request
+	 * @throws TssException
+	 */
 	void addJob(JobRequest request) throws TssException;
 }

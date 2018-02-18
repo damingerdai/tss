@@ -32,7 +32,11 @@ public class QrtzDaoImpl implements QrtzDao {
 		Instant begin = Instant.now();
         try {
 			return jdbcTemplate.query(sql, params, rs -> {
-				return rs.getString("job_class");
+				if(rs.next()) {
+					return rs.getString("job_class");
+				}
+				return null;
+
 			});
         } catch (Exception ex) {
 			throw exceptionService.buildTssDaoException(ErrorCodeConstant.ERR_DAO, sql, params, ex);

@@ -12,5 +12,6 @@ repositories {
 dependencies {
     compile(project(':tss.base'))
     compile(project(':tss.jdbc'))
+    compile(project(':tss.task'))
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: springBootVersion
 }

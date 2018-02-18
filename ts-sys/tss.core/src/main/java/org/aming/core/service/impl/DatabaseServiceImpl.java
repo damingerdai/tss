@@ -1,12 +1,9 @@
 package org.aming.core.service.impl;
 
-import com.zaxxer.hikari.HikariDataSource;
 import org.aming.core.service.DatabaseService;
 import org.aming.core.service.ExceptionService;
-import org.aming.tss.base.enums.DataBaseType;
 import org.aming.tss.base.exception.TssException;
 import org.aming.tss.base.jdbc.Database;
-import org.aming.tss.base.jdbc.JdbcInfo;
 import org.aming.tss.dao.DatabaseDao;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +21,7 @@ public class DatabaseServiceImpl implements DatabaseService {
     private ExceptionService exceptionService;
 
     @Override
-    public List<Database> getAllDatabase() {
+    public List<Database> getAllDatabase() throws TssException{
         return databaseDao.getAllDataBase();
     }
 
