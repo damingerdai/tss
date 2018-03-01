@@ -8,6 +8,7 @@ import org.quartz.Job;
  * @author daming
  * @version 2018/2/11.
  */
+@Deprecated
 public interface QrtzService {
 
     Class<? extends Job> getJobClass(String code) throws TssException;

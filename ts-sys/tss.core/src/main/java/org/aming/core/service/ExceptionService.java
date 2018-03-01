@@ -13,6 +13,8 @@ public interface ExceptionService {
 
     TssException buildTssException(String code);
 
+    TssException buildTssException(String code, String params);
+
     TssException buildTssException(String code, Object[] params, Throwable cause);
 
     TssException buildTssException(String code, Object[] params);

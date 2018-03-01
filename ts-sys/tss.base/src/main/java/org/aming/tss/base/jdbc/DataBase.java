@@ -1,5 +1,6 @@
 package org.aming.tss.base.jdbc;
 
+import org.aming.tss.base.enums.DataBaseType;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.io.Serializable;
@@ -18,6 +19,7 @@ public class Database implements Serializable {
 	private String driver;
 	private String username;
 	private String password;
+	private DataBaseType type;
 
 	public int getId() {
 		return id;
@@ -70,6 +72,15 @@ public class Database implements Serializable {
 
 	public Database setPassword(String password) {
 		this.password = password;
+		return this;
+	}
+
+	public DataBaseType getType() {
+		return type;
+	}
+
+	public Database setType(DataBaseType type) {
+		this.type = type;
 		return this;
 	}
 

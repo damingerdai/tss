@@ -3,12 +3,23 @@ package org.aming.core.service.impl;
 import org.aming.core.service.QrtzService;
 import org.aming.core.service.ScheduleService;
 import org.aming.tss.base.exception.TssException;
-import org.aming.tss.base.request.JobRequest;
+import org.aming.tss.base.request.CsvJobRequest;
+import org.aming.tss.base.response.Response;
 import org.aming.tss.job.CsvJob;
-import org.apache.commons.lang3.ClassUtils;
 import org.quartz.Job;
+import org.quartz.JobDataMap;
+import org.quartz.JobDetail;
 import org.quartz.Scheduler;
+import org.quartz.Trigger;
+import org.quartz.TriggerBuilder;
+import org.quartz.TriggerKey;
 import org.springframework.stereotype.Service;
+
+import static org.quartz.CronScheduleBuilder.cronSchedule;
+import static org.quartz.JobBuilder.newJob;
+import static org.quartz.JobKey.jobKey;
+import static org.quartz.TriggerBuilder.newTrigger;
+import static org.quartz.TriggerKey.triggerKey;
 
 /**
  * @author daming
@@ -17,20 +28,62 @@ import org.springframework.stereotype.Service;
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
 
-	private QrtzService qrtzService;
+
 	private Scheduler scheduler;
 
 	@Override
-	public void addJob(JobRequest request) throws TssException {
-		// 获取job类型
-		Class<? extends Job> clazz = null;// qrtzService.getJobClass(request.getJobCode());
+	public Response addJob(CsvJobRequest request) throws TssException {
+		try {
+			JobDataMap map = buildJobDataMap(request);
 
+			JobDetail jobDetail = buildJobDetail(request, map);
+
+			Trigger trigger = buildTrigger(request);
+
+			scheduler.scheduleJob(jobDetail, trigger);
+
+			return new Response();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		return null;
 
 	}
 
-	public ScheduleServiceImpl(QrtzService qrtzService,Scheduler scheduler) {
+	private JobDataMap buildJobDataMap(CsvJobRequest request) {
+		JobDataMap map = new JobDataMap();
+		map.put("dataBaseName", request.getDataBaseName());
+		map.put("csvOutPath", request.getCsvOutPath());
+		map.put("sender", request.getSender());
+		return map;
+	}
+
+
+	private JobDetail buildJobDetail(CsvJobRequest request, JobDataMap map) {
+		return newJob()
+				.ofType(CsvJob.class)
+				.withIdentity(jobKey(request.getJobName(), request.getJobGroup()))
+				.usingJobData(map)
+				.build();
+	}
+
+	private Trigger buildTrigger(CsvJobRequest request) {
+		return newTrigger()
+				.withIdentity(triggerKey(request.getCronExpression(),request.getJobGroup()))
+				.withSchedule(cronSchedule(request.getCronExpression()))
+				.build();
+	}
+
+
+	@Override
+	public boolean existJob(String jobName, String jobGroup) {
+		return false;
+	}
+
+
+	public ScheduleServiceImpl(Scheduler scheduler) {
 		super();
-		this.qrtzService = qrtzService;
 		this.scheduler = scheduler;
 	}
 }

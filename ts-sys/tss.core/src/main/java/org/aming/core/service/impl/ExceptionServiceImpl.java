@@ -31,7 +31,13 @@ public class ExceptionServiceImpl implements ExceptionService {
         return TssExceptionBuilder.buildTssException(code, message);
     }
 
-    @Override
+	@Override
+	public TssException buildTssException(String code, String params) {
+    	String message = MessageFormat.format(errorCodeService.getErrorMessage(code),params);
+		return TssExceptionBuilder.buildTssException(code, message);
+	}
+
+	@Override
     public TssException buildTssException(String code, Object[] params, Throwable cause) {
         String message = String.format(errorCodeService.getErrorMessage(code), params);
         return TssExceptionBuilder.buildTssException(code, message, cause);

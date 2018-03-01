@@ -1,12 +1,12 @@
 package org.aming.tss.web.controller;
 
-import org.aming.core.service.QrtzService;
-import org.aming.tss.base.request.JobRequest;
+
+import org.aming.core.service.ExceptionService;
+import org.aming.core.service.ScheduleService;
+import org.aming.core.service.ValidateService;
+import org.aming.tss.base.request.CsvJobRequest;
 import org.aming.tss.base.response.Response;
-import org.quartz.Job;
-import org.quartz.JobDetail;
-import org.quartz.JobKey;
-import org.quartz.Scheduler;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,27 +21,27 @@ import static org.quartz.JobBuilder.newJob;
 @RequestMapping(path = "/job")
 public class SchedulerController {
 
-    private Scheduler scheduler;
+    private ScheduleService scheduleService;
 
-    private QrtzService qrtzService;
+    private ExceptionService exceptionService;
+
+    private ValidateService validateService;
 
     @PostMapping(path = "/addJob")
-    public Response addJob(JobRequest request) {
+    public Response addJob(CsvJobRequest request) {
         try {
-        	Class<? extends Job> jobClass = qrtzService.getJobClass(request.getJobCode());
-			JobDetail jobDetail = newJob(jobClass)
-					.withIdentity(JobKey.jobKey(request.getJobName(), request.getJobGroup()))
-					.build();
-
+ 			validateService.validateCsvJobRequest(request);
+ 			return scheduleService.addJob(request);
         } catch (Exception ex) {
 
         }
         return null;
     }
 
-    public SchedulerController(Scheduler scheduler,QrtzService qrtzService) {
+    public SchedulerController(ScheduleService scheduleService,ExceptionService exceptionService,ValidateService validateService){
         super();
-        this.scheduler = scheduler;
-        this.qrtzService =  qrtzService;
+        this.scheduleService = scheduleService;
+        this.exceptionService =  exceptionService;
+        this.validateService = validateService;
     }
 }

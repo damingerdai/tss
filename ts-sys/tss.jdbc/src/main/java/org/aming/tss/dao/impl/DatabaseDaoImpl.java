@@ -2,6 +2,7 @@ package org.aming.tss.dao.impl;
 
 import org.aming.core.service.ExceptionService;
 import org.aming.tss.base.constant.ErrorCodeConstant;
+import org.aming.tss.base.enums.DataBaseType;
 import org.aming.tss.base.exception.TssDaoException;
 import org.aming.tss.base.jdbc.Database;
 import org.aming.tss.base.logger.LoggerManager;
@@ -48,7 +49,7 @@ public class DatabaseDaoImpl implements DatabaseDao {
 
 	@Override
 	public Database getDataBase(String databaseName) throws TssDaoException {
-    	String sql = "select id,`name`, driver, url,`username`,`password` from `database` where `status` = 1 where name = ?";
+    	String sql = "select id,`name`, driver, url,`username`,`password`,`type` from `database` where `status` = 1 where name = ?";
     	Object[] params = new Object[] { databaseName };
     	Instant begin = Instant.now();
     	try {
@@ -74,7 +75,8 @@ public class DatabaseDaoImpl implements DatabaseDao {
 				.setName(rs.getString("name"))
 				.setDriver(rs.getString("driver"))
 				.setUsername(rs.getString("username"))
-				.setPassword(rs.getString("password"));
+				.setPassword(rs.getString("password"))
+				.setType(DataBaseType.getDataBaseType(rs.getInt("type")));
 	}
 
 	public DatabaseDaoImpl(JdbcTemplate jdbcTemplate,ExceptionService exceptionService) {

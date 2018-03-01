@@ -2,6 +2,7 @@ package org.aming.core.service.impl;
 
 import org.aming.core.service.DatabaseService;
 import org.aming.core.service.ExceptionService;
+import org.aming.tss.base.constant.ErrorCodeConstant;
 import org.aming.tss.base.exception.TssException;
 import org.aming.tss.base.jdbc.Database;
 import org.aming.tss.dao.DatabaseDao;
@@ -22,29 +23,26 @@ public class DatabaseServiceImpl implements DatabaseService {
 
     @Override
     public List<Database> getAllDatabase() throws TssException{
-        return databaseDao.getAllDataBase();
+		try {
+			return databaseDao.getAllDataBase();
+		} catch (TssException ex) {
+			throw ex;
+		} catch (Exception ex) {
+			throw exceptionService.buildTssException(ErrorCodeConstant.COMMON_ERR, "fail to get all data base info");
+		}
     }
 
 	@Override
-	public DataSource getDataBase(String databaseName) throws TssException {
+	public Database getDataBase(String databaseName) throws TssException {
     	try {
-			Database dataBase = databaseDao.getDataBase(databaseName);
-//			DataBaseType dbt = DataBaseType.getDataBaseType(dataBase.getType());
-//			if (dbt == DataBaseType.MYSQL) {
-//				HikariDataSource dataSource = new HikariDataSource();
-//			}
-			throw new RuntimeException("该数据库尚不支持");
+			return databaseDao.getDataBase(databaseName);
+		} catch (TssException ex) {
+    		throw ex;
 		} catch (Exception ex) {
-
+			throw exceptionService.buildTssException(ErrorCodeConstant.COMMON_ERR, "fail to get data base info");
 		}
-		return null;
 	}
 
-	private JdbcInfo getMysqlJdbcInfo(Database dataBase) {
-    	String driver = "com.mysql.cj.jdbc.Driver";
-    	String url = "null";
-    	return null;
-	}
 
 	public DatabaseServiceImpl(DatabaseDao databaseDao,ExceptionService exceptionService) {
         super();

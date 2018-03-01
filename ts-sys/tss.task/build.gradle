@@ -4,6 +4,8 @@ ext {
 
 dependencies {
     compile(project(":tss.base"))
+    compile(project(":tss.core"))
+    compile group: 'com.opencsv', name: 'opencsv', version: '4.1'
     compile group: 'org.quartz-scheduler', name: 'quartz', version: quartzVersion
     compile group: 'org.quartz-scheduler', name: 'quartz-jobs', version: quartzVersion
 }

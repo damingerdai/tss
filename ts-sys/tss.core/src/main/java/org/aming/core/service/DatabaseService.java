@@ -2,8 +2,7 @@ package org.aming.core.service;
 
 import org.aming.tss.base.exception.TssException;
 import org.aming.tss.base.jdbc.Database;
-
-import javax.sql.DataSource;
+;
 import java.util.List;
 
 /**
@@ -14,5 +13,5 @@ public interface DatabaseService {
 
     List<Database> getAllDatabase() throws TssException;
 
-    DataSource getDataBase(String databaseName) throws TssException;
+	Database getDataBase(String databaseName) throws TssException;
 }
