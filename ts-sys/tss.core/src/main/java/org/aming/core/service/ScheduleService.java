@@ -2,6 +2,7 @@ package org.aming.core.service;
 
 import org.aming.tss.base.exception.TssException;
 import org.aming.tss.base.request.CsvJobRequest;
+import org.aming.tss.base.response.JobListResponse;
 import org.aming.tss.base.response.Response;
 
 /**
@@ -18,4 +19,6 @@ public interface ScheduleService {
 	Response addJob(CsvJobRequest request) throws TssException;
 
 	boolean existJob(String jobName, String jobGroup);
+
+	JobListResponse getAllJobs() throws TssException;
 }
