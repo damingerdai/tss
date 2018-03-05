@@ -85,14 +85,16 @@ const appRoutes: Routes = [
     MatToolbarModule,
     MatTooltipModule,
   ],
-  declarations: [DatasourceComponent, JobComponent]
+  declarations: []
 })
 export class AngularMasterailModule {}
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DatasourceComponent,
+    JobComponent
   ],
   imports: [
     RouterModule.forRoot(
