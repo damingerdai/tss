@@ -2,12 +2,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {CdkTableModule} from '@angular/cdk/table';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { CdkTableModule } from '@angular/cdk/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import {
   MatAutocompleteModule,
-  MatButtonModule,
   MatButtonToggleModule,
   MatCardModule,
   MatCheckboxModule,
@@ -17,24 +21,20 @@ import {
   MatDividerModule,
   MatExpansionModule,
   MatGridListModule,
-  MatIconModule,
   MatInputModule,
   MatListModule,
   MatMenuModule,
   MatNativeDateModule,
-  MatPaginatorModule,
   MatProgressBarModule,
   MatProgressSpinnerModule,
   MatRadioModule,
   MatRippleModule,
   MatSelectModule,
-  MatSidenavModule,
   MatSliderModule,
   MatSlideToggleModule,
   MatSnackBarModule,
   MatSortModule,
   MatStepperModule,
-  MatTableModule,
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,

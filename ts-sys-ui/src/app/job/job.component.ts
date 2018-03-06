@@ -14,7 +14,7 @@ const JOB_INFOS: JobInfo[] = [
   styleUrls: ['./job.component.css']
 })
 export class JobComponent implements OnInit {
-  displayedColumns = ['jobName', 'jobGroup', 'cronExpression', 'status'];
+  displayedColumns = ['jobName', 'jobGroup', 'cronExpression', 'status', 'action'];
   dataSource = new MatTableDataSource(JOB_INFOS);
 
   ngOnInit() {
