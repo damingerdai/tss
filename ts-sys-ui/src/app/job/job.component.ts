@@ -13,6 +13,7 @@ const JOB_INFOS: JobInfo[] = [
   templateUrl: './job.component.html',
   styleUrls: ['./job.component.css']
 })
+
 export class JobComponent implements OnInit {
   displayedColumns = ['jobName', 'jobGroup', 'cronExpression', 'status'];
   dataSource = new MatTableDataSource(JOB_INFOS);
