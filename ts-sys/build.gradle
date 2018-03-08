@@ -63,3 +63,9 @@ subprojects {
         testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion
     }
 }
+
+task buildPackage() << {
+
+
+
+}
