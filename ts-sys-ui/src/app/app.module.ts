@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
 
 import {
   MatAutocompleteModule,
@@ -21,7 +22,6 @@ import {
   MatDividerModule,
   MatExpansionModule,
   MatGridListModule,
-  MatInputModule,
   MatListModule,
   MatMenuModule,
   MatNativeDateModule,
@@ -113,7 +113,7 @@ export class AngularMasterailModule {}
   entryComponents: [
     JobComponent,
     AddJobComponent
-  ]
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
