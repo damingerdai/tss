@@ -9,6 +9,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import {
   MatAutocompleteModule,
@@ -17,7 +18,6 @@ import {
   MatCheckboxModule,
   MatChipsModule,
   MatDatepickerModule,
-  MatDialogModule,
   MatDividerModule,
   MatExpansionModule,
   MatGridListModule,
@@ -43,6 +43,7 @@ import {
 import { AppComponent } from './app.component';
 import { DatasourceComponent } from './datasource/datasource.component';
 import { JobComponent } from './job/job.component';
+import { AddJobComponent } from './job/add.job/add.job.component';
 
 const appRoutes: Routes = [
   { path: 'datasource', component: DatasourceComponent },
@@ -94,7 +95,8 @@ export class AngularMasterailModule {}
   declarations: [
     AppComponent,
     DatasourceComponent,
-    JobComponent
+    JobComponent,
+    AddJobComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -108,6 +110,10 @@ export class AngularMasterailModule {}
     MatNativeDateModule,
     ReactiveFormsModule
   ],
+  entryComponents: [
+    JobComponent,
+    AddJobComponent
+  ]
   providers: [],
   bootstrap: [AppComponent]
 })
